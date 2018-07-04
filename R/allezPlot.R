@@ -3,7 +3,7 @@
 ## 1. Column order by GO/KEGG sum
 ## 2. Row order by GO/KEGG category, gene reduction value
 ## 3. Until remaining gene scores sum to 0
-ordMat <- function(aMat,allez.out){
+ordMat <- function(aMat,allez.out,maxRow=10){
   rind <- cind <- character(0)
   zc <- grep("z.score",colnames(allez.out$setscores))
   for(i in 1:ncol(aMat)){
@@ -12,7 +12,8 @@ ordMat <- function(aMat,allez.out){
                 -match(cind,colnames(aMat)),drop=FALSE]*
            allez.out$aux$globe[-match(rind,names(allez.out$aux$globe))]
     s <- apply(mat,2,sum)
-    if(any(s>0)){    
+    ok <- ( any(s>0) | i <= maxRow )
+    if(ok){    
         ## smax <- which.max(s) ## first set with highest sum
         ## break ties using z.score ##
         smax <- order(s,allez.out$setscores[names(s),zc],decreasing=TRUE)[1]
