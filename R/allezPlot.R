@@ -12,7 +12,7 @@ ordMat <- function(aMat,allez.out,maxRow=10){
                 -match(cind,colnames(aMat)),drop=FALSE]*
            allez.out$aux$globe[-match(rind,names(allez.out$aux$globe))]
     s <- apply(mat,2,sum)
-    ok <- ( any(s>0) | i <= maxRow )
+    ok <- ( any(s>0) & i <= maxRow )
     if(ok){    
         ## smax <- which.max(s) ## first set with highest sum
         ## break ties using z.score ##
