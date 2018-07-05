@@ -10,7 +10,7 @@ sum of gene scores not in preceding sets, and genes are ordered by scores
 within set. Higher gene scores are indicated by darker color.
 }
 \usage{
-allezPlot(allez.out, n.low = 5, n.upp = 500, n.cell=0, zthr = 3, gmax=20,
+allezPlot(allez.out, n.low = 5, n.upp = 500, n.cell=0, zthr = 3, gmax=20, maxSets=10,
 glab=c("none","gene_id","symbol"), slab=c("none","z.score","set.means"),
 ...)
 }
@@ -26,6 +26,7 @@ glab=c("none","gene_id","symbol"), slab=c("none","z.score","set.means"),
   mainly used in conjunction with binary scores}
   \item{zthr}{numeric, keep sets with z-scores at this level or higher}
   \item{gmax}{numeric, maximum number of genes for x-axis labelling}
+  \item{maxSets}{numeric, maximum number of sets in plot}
   \item{glab}{character string, adds gene labels to the x-axis: "none"
     indicates no gene labels, "gene_id" indicates entrez id, and
     "symbol" is gene symbol. Useful mainly for binary scores.}

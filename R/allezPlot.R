@@ -2,8 +2,9 @@
 ## Order design matrix ##
 ## 1. Column order by GO/KEGG sum
 ## 2. Row order by GO/KEGG category, gene reduction value
-## 3. Until remaining gene scores sum to 0
-ordMat <- function(aMat,allez.out,maxRow=10){
+## 3. Until remaining gene scores sum to 0 (or until at most maxSets sets)
+
+ordMat <- function(aMat,allez.out,maxSets){
   rind <- cind <- character(0)
   zc <- grep("z.score",colnames(allez.out$setscores))
   for(i in 1:ncol(aMat)){
@@ -12,7 +13,7 @@ ordMat <- function(aMat,allez.out,maxRow=10){
                 -match(cind,colnames(aMat)),drop=FALSE]*
            allez.out$aux$globe[-match(rind,names(allez.out$aux$globe))]
     s <- apply(mat,2,sum)
-    ok <- ( any(s>0) & i <= maxRow )
+    ok <- ( any(s>0) & i <= maxSets)
     if(ok){    
         ## smax <- which.max(s) ## first set with highest sum
         ## break ties using z.score ##
@@ -103,11 +104,12 @@ allezPlot <- function(allez.out,
                      n.cell=0,
                      zthr=3,
                      gmax=20,
+                     maxSets=10,
                      glab=c("none","gene_id","symbol"),
                      slab=c("none","z.score","set.means"),
                      ...){
 aMat <- allezMat(allez.out,n.low,n.upp,n.cell,zthr)
-aOrd <- ordMat(aMat,allez.out)
+aOrd <- ordMat(aMat,allez.out,maxSets)
 allezplot(aOrd, allez.out,
           glab=ifelse(nrow(aOrd)<=gmax,glab,"none"),
           slab=slab, ...)
