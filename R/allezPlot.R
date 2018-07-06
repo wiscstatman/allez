@@ -80,7 +80,7 @@ allezplot <- function(aOrd, allez.out,
             "inches and re-run allezPlot"))
 
   image(1:nrow(aOrd),1:ncol(aOrd),aOrd[,ncol(aOrd):1,drop=FALSE],
-        xlab="",ylab="", yaxt="n",
+        xlab="gene",ylab="", yaxt="n",
         xaxt=ifelse(glab=="none","s","n"),
         col=gray(seq(1,0,length=64)),
         xlim=c(0.5,max((xpos+0.5)/(1-twidth/par("pin")[1]))))
