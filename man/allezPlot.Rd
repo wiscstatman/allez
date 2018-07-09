@@ -10,7 +10,7 @@ sum of gene scores not in preceding sets, and genes are ordered by scores
 within set. Higher gene scores are indicated by darker color.
 }
 \usage{
-allezPlot(allez.out, n.low = 5, n.upp = 500, n.cell=0, zthr = 3, gmax=20, maxSets=10,
+allezPlot(allez.out, n.low = 5, n.upp = 500, n.cell=2, nominal.alpha=0.01, gmax=20, maxSets=10,
 glab=c("none","gene_id","symbol"), slab=c("none","z.score","set.means"),
 ...)
 }
@@ -24,7 +24,7 @@ glab=c("none","gene_id","symbol"), slab=c("none","z.score","set.means"),
     ranking}
     \item{n.cell}{numeric, minimum number of genes in a set with score>0,
   mainly used in conjunction with binary scores}
-  \item{zthr}{numeric, keep sets with z-scores at this level or higher}
+ \item{nominal.alpha}{numeric, keep sets with z-scores exceeding Bonferroni level at this value}
   \item{gmax}{numeric, maximum number of genes for x-axis labelling}
   \item{maxSets}{numeric, maximum number of sets in plot}
   \item{glab}{character string, adds gene labels to the x-axis: "none"
@@ -63,12 +63,12 @@ scores  <- (1/2)*sqrt(28)*log((1-npc)/(1+npc))
 
 npc.kegg <- allez( scores=scores, lib="hgu133plus2", sets="KEGG")
 
-allezPlot(npc.kegg,zthr=5)
+allezPlot(npc.kegg)
 
 \dontrun{
 npc.go <- allez( scores=scores, lib="hgu133plus2", sets="GO")
 npc.all <- allezC(npc.go, npc.kegg)
 
-allezPlot(npc.all,zthr=6)
+allezPlot(npc.all)
 }
 }

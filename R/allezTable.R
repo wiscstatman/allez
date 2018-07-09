@@ -7,8 +7,8 @@
 allezTable <- function(allez.out,
                        n.low=5,
                        n.upp=500,
-                       n.cell=0,
-                       zthr=5,
+                       n.cell=2,
+                       nominal.alpha=0.01,
                        symbol=FALSE,
                        in.set=FALSE){
   ## gene list of gene_id, probe_id, or symbol, from set.data ##
@@ -23,11 +23,20 @@ allezTable <- function(allez.out,
   G <- length(allez.out$aux$globe)
 
   ## If set.size==G then z.score=NA ##
-  ok <- (allez.out$setscores$set.size >= n.low) &
-    (allez.out$setscores$set.size <= n.upp) &
-      (allez.out$setscores$set.size < G) &
-      (allez.out$setscores[,zcol] >= zthr) &
-      (nc[rownames(allez.out$setscores)] >= n.cell)
+
+ # first, check that the sets are the rights sizes
+  ok1 <- (allez.out$setscores$set.size >= n.low) &
+    (allez.out$setscores$set.size <= n.upp) & (allez.out$setscores$set.size < G) 
+  #
+  nset <- sum(ok1) ## how many sets in play
+
+  zthr <- qnorm( 1-nominal.alpha/nset ) ## one-sided Bonferroni corrected
+
+  # second, check extreme Z and interesting action in the set
+
+  ok <-   ok1 & (allez.out$setscores[,zcol] >= zthr) &
+         (nc[rownames(allez.out$setscores)] >= n.cell)
+
   allez.table <- allez.out$setscores[ok,
                  -grep("sd",colnames(allez.out$setscores))]
    

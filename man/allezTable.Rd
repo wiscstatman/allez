@@ -10,7 +10,7 @@ and z-score; orders sets from highest to lowest set mean.  A functional set is
 removed if it contains the entire set of input gene scores.
 }
 \usage{
-allezTable(allez.out, n.low = 5, n.upp = 500, n.cell=0, zthr = 5, symbol = FALSE, in.set = FALSE)
+allezTable(allez.out, n.low = 5, n.upp = 500, n.cell=2, nominal.alpha=0.01, symbol = FALSE, in.set = FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -21,7 +21,7 @@ allezTable(allez.out, n.low = 5, n.upp = 500, n.cell=0, zthr = 5, symbol = FALSE
     consider for ranking}
   \item{n.cell}{numeric, minimum number of genes in a set with score>0,
     mainly used for binary scores}
-  \item{zthr}{numeric, threshold z-scores at this level}
+ \item{nominal.alpha}{numeric, keep sets with z-scores exceeding Bonferroni level at this value}
   \item{symbol}{logical; if TRUE, list gene symbols in set, otherwise
     list gene or probe ID} 
   \item{in.set}{logical; if TRUE, will list genes in set that had

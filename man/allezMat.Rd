@@ -10,7 +10,7 @@ indicator matrix of the highest ranking sets; sets IDs are listed as
 columns, genes as rows.
 }
 \usage{
-allezMat(allez.out, n.low = 5, n.upp = 500, n.cell = 0, zthr = 3)
+allezMat(allez.out, n.low = 5, n.upp = 500, n.cell = 2, nominal.alpha=0.01)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -21,7 +21,7 @@ allezMat(allez.out, n.low = 5, n.upp = 500, n.cell = 0, zthr = 3)
     ranking}
   \item{n.cell}{numeric, minimum number of genes in a set with score>0,
   mainly used in conjunction with binary scores}
-  \item{zthr}{numeric, keep sets with z-scores at this level or higher}
+  \item{nominal.alpha}{numeric, keep sets with z-scores exceeding Bonferroni level at this value}
 }
 \value{
 A matrix of {0,1}, with genes listed as rows and sets as columns; matrix
@@ -36,6 +36,6 @@ data(npc)
 scores  <- (1/2)*sqrt(28)*log((1-npc)/(1+npc))
 npc.kegg <- allez(scores, lib="hgu133plus2", sets="KEGG")
 
-amat <- allezMat(npc.kegg,zthr=5)
+amat <- allezMat(npc.kegg)
 head(amat)
 }

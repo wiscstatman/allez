@@ -101,14 +101,14 @@ allezplot <- function(aOrd, allez.out,
 allezPlot <- function(allez.out,
                      n.low=5,
                      n.upp=500,
-                     n.cell=0,
-                     zthr=3,
+                     n.cell=2,
+                     nominal.alpha=0.01,
                      gmax=20,
                      maxSets=10,
                      glab=c("none","gene_id","symbol"),
                      slab=c("none","z.score","set.means"),
                      ...){
-aMat <- allezMat(allez.out,n.low,n.upp,n.cell,zthr)
+aMat <- allezMat(allez.out,n.low,n.upp,n.cell,nominal.alpha)
 aOrd <- ordMat(aMat,allez.out,maxSets)
 allezplot(aOrd, allez.out,
           glab=ifelse(nrow(aOrd)<=gmax,glab,"none"),
