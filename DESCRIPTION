@@ -1,6 +1,6 @@
 Package: allez
-Version: 2.0.6
-Date: 2018-07-05
+Version: 2.0.7
+Date: 2018-07-08
 Title: Random-set calibration of gene-set statistics
 Author: Michael Newton <newton@stat.wisc.edu>, Subhrangshu Nandi, Ning Leng and Aimee Teo Broman
 Maintainer: Aimee Teo Broman <abroman@biostat.wisc.edu>
