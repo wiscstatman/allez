@@ -10,4 +10,4 @@ Suggests: hgu133plus2.db, GO.db, KEGG.db, reactome.db
 LazyLoad: yes
 LazyData: yes
 License: GPL (>= 2)
-Packaged: 2018-07-05; wiscstatman
+Packaged: 2018-07-08; wiscstatman
