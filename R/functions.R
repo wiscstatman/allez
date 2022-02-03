@@ -14,13 +14,6 @@ fn_loadSetLibraries <- function(sets){
       require(GO.db)
       message( 'Loaded Package GO.db' )
     }
-  }, KEGG = {
-    if(!try( require(KEGG.db), silent=TRUE )){
-      stop( "Please install 'KEGG.db' " )
-    } else{
-      #require(KEGG.db)
-      message( 'do not ask for KEGG.db' )
-    }
   }, REACTOME = {
     if(!try(require(reactome.db), silent=TRUE)){
       stop( "Please install 'reactome.db' " )
@@ -30,7 +23,7 @@ fn_loadSetLibraries <- function(sets){
     }
   },
          {
-           stop( "Entry should be GO, KEGG or REACTOME, all uppercase")
+           stop( "Entry should be GO or REACTOME, all uppercase")
          })
   options(warn=1)
 }

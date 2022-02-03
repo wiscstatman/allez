@@ -1,4 +1,4 @@
-## Outputs top GO/KEGG categories ##
+## Outputs top GO categories ##
 
 ## score >= 0
 ## z.score is one-sided: z.score < 0 indicate enrichment

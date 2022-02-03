@@ -1,7 +1,7 @@
 
 ## Make an annotation design matrix
 ## rows=names(allez.out$aux$globe)
-## cols=subset of GO/KEGG categories
+## cols=subset of GO categories
 allezMat <- function(allez.out,
                      n.low=5,
                      n.upp=500,
@@ -13,7 +13,7 @@ allezMat <- function(allez.out,
   nc <- tapply(allez.out$aux$set.data$gscores,
                allez.out$aux$set.data[,1],
                function(x) sum(x>0 & !is.na(x)))
-## Subset of GO/KEGG terms ##
+## Subset of GO terms ##
   # first, check that the sets are the rights sizes
   ok1 <- (allez.out$setscores$set.size >= n.low) &
          (allez.out$setscores$set.size <= n.upp) 
@@ -28,7 +28,7 @@ allezMat <- function(allez.out,
 
 
 ## allez.out$aux$set.data: 1st col = set id; 2nd col = gene id ##
-## mat: genes by GO/KEGG category, 0 if not in cat, 1 if in category ##
+## mat: genes by GO category, 0 if not in cat, 1 if in category ##
   mat <- sapply(rownames(allez.out$setscores)[ok],function(x)
        as.numeric(names(allez.out$aux$globe) %in%
        allez.out$aux$set.data[allez.out$aux$set.data[,1]==x,2]))

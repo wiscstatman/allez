@@ -1,5 +1,5 @@
 ## Function to combine allez output, for same probescores / probe package ##
-## Usually GO and KEGG outputs ##
+## Usually GO outputs ##
 allezC <- function(...){
   dots <- list(...)
   if(length(dots)==1)

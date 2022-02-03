@@ -1,7 +1,7 @@
 
 ## Order design matrix ##
-## 1. Column order by GO/KEGG sum
-## 2. Row order by GO/KEGG category, gene reduction value
+## 1. Column order by GO sum
+## 2. Row order by GO category, gene reduction value
 ## 3. Until remaining gene scores sum to 0 (or until at most maxSets sets)
 
 ordMat <- function(aMat,allez.out,maxSets){
@@ -31,13 +31,9 @@ allezplot <- function(aOrd, allez.out,
               slab=c("none","z.score","set.means"),
                       ...){
   require(GO.db)
-  #require(KEGG.db)
 
   goterm <- toTable(GOTERM)[,c("go_id","Term")]
   names(goterm) <- c("id","term")
-  #keggterm <- toTable(KEGGPATHID2NAME)
-  #names(keggterm) <- c("id","term")
-  #allterm <- rbind(goterm,keggterm)
   allterm <- rbind(goterm)
   term <- allterm[match(colnames(aOrd),allterm$id),]
 

@@ -3,7 +3,7 @@ allez <- function (scores,
                    lib,
                    idtype = c("ENTREZID", "SYMBOL"),
                    library.loc=NULL,
-                   sets = c("GO","KEGG"),
+                   sets = c("GO"),
                    locallist = NULL,
                    collapse = c("full", "partial", "none"),
                    reduce = NULL,
@@ -43,8 +43,6 @@ allez <- function (scores,
   if( min(vv) == 0 )
     stop("no variance in at least one profile" ) 
   if(universe=="local"){
-    if(sets=="KEGG")
-      stop("local universe only available for GO")
     if(collapse=="partial")
       stop("partial correction not implemented for 'local'")
   }
@@ -61,7 +59,7 @@ allez <- function (scores,
   message("Loading necessary libraries...")
   fn_loadPlatformLibraries( Libraries=lib, library.loc=library.loc )
 
-  set_id <- switch(sets, GO="go_id", KEGG="path_id")
+  set_id <- "go_id"
   is.org <- substr(lib,1,3)=="org"
   orgpkg <- ifelse(is.org,lib[1],get(paste(lib[1],"ORGPKG",sep="")))
 
@@ -77,7 +75,7 @@ allez <- function (scores,
      set2probe <- set2probe[set2probe$probe_id %in% names(scores),]
    }
   if(is.org | collapse != "none"){
-    ## Use org info for ENTREZ TO GO/KEGG ID ##
+    ## Use org info for ENTREZ TO GO ID ##
     set2eg <- toTable(getDataEnv(name=ifelse(sets=="GO",
               "GO2ALLEGS","PATH2EG"), lib=orgpkg))
     org.symbol <- toTable(getDataEnv(name="SYMBOL",lib=orgpkg))
@@ -264,12 +262,6 @@ allez <- function (scores,
       main <- data.frame(gterms[match(rownames(res),gterms$go_id),
                                 c("Term","Ontology")],res)
       rownames(main) <- rownames(res)
-    }
-    if (sets == "KEGG") {
-      #kterms <- toTable(KEGGPATHID2NAME)
-      #main <- data.frame(kterms[match(rownames(res),kterms$path_id),
-      #        "path_name",drop=FALSE], res)
-      #rownames(main) <- rownames(res)
     }
   }
   out <- list(setscores = main, aux = aux, call = match.call())

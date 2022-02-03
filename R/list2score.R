@@ -2,14 +2,13 @@
 list2score <- function(idlist,lib,
               idtype=c("SYMBOL","ENTREZID","PROBEID","REFSEQ",
                   "ENSEMBL","ACCNUM","UNIPROT","PMID"),
-              sets=c("ALL","GO","KEGG")){
+              sets=c("ALL","GO")){
 
     idtype <- match.arg(idtype)
     sets <- match.arg(sets)
 
     gstype <- if(substr(lib,1,3)=="org") "EG" else "PROBE"
-    gs <- c(GO=paste("GO2ALL",gstype,"S",sep=""),
-            KEGG=paste("PATH2",gstype,sep=""))
+    gs <- c(GO=paste("GO2ALL",gstype,"S",sep=""))
 
     allgenes <- mappedRkeys(get(paste(lib,idtype,sep="")))
     if(any(!(i <- idlist %in% allgenes))){
@@ -25,7 +24,7 @@ list2score <- function(idlist,lib,
            toTable(revmap(get(paste(lib,idtype,sep="")))[idlist])[,1]
 
     ## ALL=all EG or PROBE keys in platform ##
-    ## GO, KEGG = all EG or PROBE in GO or PATH sets ##
+    ## GO, = all EG or PROBE in GO or PATH sets ##
     allids <- if(sets=="ALL") keys(get(paste(lib,idtype,sep=""))) else
         mappedLkeys(get(paste(lib,gs[sets],sep="")))   
     
