@@ -31,13 +31,14 @@ allezplot <- function(aOrd, allez.out,
               slab=c("none","z.score","set.means"),
                       ...){
   require(GO.db)
-  require(KEGG.db)
+  #require(KEGG.db)
 
   goterm <- toTable(GOTERM)[,c("go_id","Term")]
   names(goterm) <- c("id","term")
-  keggterm <- toTable(KEGGPATHID2NAME)
-  names(keggterm) <- c("id","term")
-  allterm <- rbind(goterm,keggterm)
+  #keggterm <- toTable(KEGGPATHID2NAME)
+  #names(keggterm) <- c("id","term")
+  #allterm <- rbind(goterm,keggterm)
+  allterm <- rbind(goterm)
   term <- allterm[match(colnames(aOrd),allterm$id),]
 
   glab <- match.arg(glab)
