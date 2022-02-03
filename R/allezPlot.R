@@ -37,8 +37,8 @@ allezplot <- function(aOrd, allez.out,
   allterm <- rbind(goterm)
   term <- allterm[match(colnames(aOrd),allterm$id),]
 
-  glab <- match.arg(glab)
-  slab <- match.arg(slab)
+  #glab <- match.arg(glab)
+  #slab <- match.arg(slab)
 
   p <- par(no.readonly=TRUE)
 
