@@ -266,10 +266,10 @@ allez <- function (scores,
       rownames(main) <- rownames(res)
     }
     if (sets == "KEGG") {
-      kterms <- toTable(KEGGPATHID2NAME)
-      main <- data.frame(kterms[match(rownames(res),kterms$path_id),
-              "path_name",drop=FALSE], res)
-      rownames(main) <- rownames(res)
+      #kterms <- toTable(KEGGPATHID2NAME)
+      #main <- data.frame(kterms[match(rownames(res),kterms$path_id),
+      #        "path_name",drop=FALSE], res)
+      #rownames(main) <- rownames(res)
     }
   }
   out <- list(setscores = main, aux = aux, call = match.call())
