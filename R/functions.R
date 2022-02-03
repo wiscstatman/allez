@@ -18,8 +18,8 @@ fn_loadSetLibraries <- function(sets){
     if(!try( require(KEGG.db), silent=TRUE )){
       stop( "Please install 'KEGG.db' " )
     } else{
-      require(KEGG.db)
-      message( 'Loaded Package KEGG.db' )
+      #require(KEGG.db)
+      message( 'don't ask for KEGG.db' )
     }
   }, REACTOME = {
     if(!try(require(reactome.db), silent=TRUE)){
