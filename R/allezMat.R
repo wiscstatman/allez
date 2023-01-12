@@ -29,9 +29,13 @@ allezMat <- function(allez.out,
 
 ## allez.out$aux$set.data: 1st col = set id; 2nd col = gene id ##
 ## mat: genes by GO category, 0 if not in cat, 1 if in category ##
+
+  rightCol <- 2  ## if not symbols...get a correct switch 
+  rightCol <- 3  ## for symbols  
+
   mat <- sapply(rownames(allez.out$setscores)[ok],function(x)
        as.numeric(names(allez.out$aux$globe) %in%
-       allez.out$aux$set.data[allez.out$aux$set.data[,1]==x,2]))
+       allez.out$aux$set.data[allez.out$aux$set.data[,1]==x,rightCol]))
   rownames(mat) <- names(allez.out$aux$globe)
   mat
 }
