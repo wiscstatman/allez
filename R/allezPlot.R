@@ -41,12 +41,12 @@ allezplot <- function(aOrd, allez.out,
   #slab <- match.arg(slab)
 
   p <- par(no.readonly=TRUE)
-
+  rightCol <- 3 ## fix column call for symbols
   xlabs <- switch(glab,
           "none" = 1:nrow(aOrd),
           "gene_id" = rownames(aOrd),
           "symbol" = allez.out$aux$set.data[
-            match(rownames(aOrd),allez.out$aux$set.data[,2]),"symbol"])
+            match(rownames(aOrd),allez.out$aux$set.data[,rightcol]),"symbol"])
   zlabs <- if(slab=="none") 1:ncol(aOrd) else
            round(allez.out$setscore[colnames(aOrd),slab],2)
 
@@ -111,3 +111,5 @@ allezplot(aOrd, allez.out,
           glab=ifelse(nrow(aOrd)<=gmax,glab,"none"),
           slab=slab, ...)
 }
+            
+            
