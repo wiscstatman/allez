@@ -16,7 +16,7 @@ allez <- function (scores,
 
   ## Disallow NA's in scores ##
   if (any(is.na(scores))){
-    error("Scores containing NA are not permitted. Please handle")
+    stop("Scores containing NA are not permitted. Please handle")
     scores[is.na(scores)] <- 0
   }
   
