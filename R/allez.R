@@ -13,12 +13,11 @@ allez <- function (scores,
                    cutoff = NULL,
                    annotate = TRUE)
 {
-  stopifnot(any(!is.na(scores)))
 
-  ## Remove NA's from scores ##
+  ## Disallow NA's in scores ##
   if (any(is.na(scores))){
-    warning("scores containing NA's will be excluded")
-    scores <- scores[!is.na(scores)]
+    error("Scores containing NA are not permitted. Please handle")
+    scores[is.na(scores)] <- 0
   }
   
   scorenames <- names(scores)
