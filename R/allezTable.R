@@ -16,11 +16,14 @@ allezTable <- function(allez.out,          # output from allez
   idcol <- ifelse(symbol,3,2)
   ## z.score column ##
   zcol <- grep("z.score",colnames(allez.out$setscores))[1]
+  
+  threshold.is.na <- is.na(score.threshold)
+  score.threshold <- ifelse(threshold.is.na, 0, score.threshold)
 
    ## Number of genes in list and functional set ##
   nc <- tapply(allez.out$aux$set.data$gscores,
                allez.out$aux$set.data[,1],
-               function(x) sum(x > 0))
+               function(x) sum(x > score.threshold))
   G <- length(allez.out$aux$globe)
 
   ## If set.size==G then z.score=NA ##
@@ -56,7 +59,7 @@ allezTable <- function(allez.out,          # output from allez
     ifelse(allez.table[,grep("z.score",colnames(allez.table))[1]]>0,
            "pos","neg"))] else character(0)
 
-  if(!is.na(score.threshold)){
+  if(!threshold.is.na){
     set.data <- set.data[set.data$gscores > score.threshold,]
     genes <- data.frame(
              pos=tapply(set.data[,idcol],set.data[,1],paste,collapse=";"),
