@@ -121,7 +121,10 @@ allezplot <- function(aOrd, allez.out,
         )
       ) + 
     scale_y_discrete(limits = colnames(aOrd), position="left") + 
-    annotate(geom="text", x = xpos + 10, y = nsets:1, label = term$term, hjust = 0)
+    annotate(geom="text", x = xpos + 10, y = nsets:1, label = term$term, hjust = 0)+ 
+    scale_color_gradient(low = "#FFFFFF00", high = "#000000FF")+ 
+    scale_fill_gradient(low = "#FFFFFF00", high = "#000000FF") +
+    ylab("")
   
 }
 
