@@ -152,6 +152,8 @@ allez <- function (scores,
     gscores[unique(set.data[set.data[,1] %in% bpmfcc,cl])]
   } else gscores[unique(set.data[,cl])]
 
+  globe <- c(globe)  ## a simple vector to be conformable in ordMat [edit 7/1/2025]
+
   mu.globe <- mean(globe)
   sigma.globe <- sd(globe)
   G <- length(globe)
