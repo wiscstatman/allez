@@ -6,7 +6,7 @@ allezMat <- function(allez.out,
                      n.low=5,
                      n.upp=500,
                      n.cell=2,
-                     nominal.alpha=0.01){
+                     nominal.alpha=0.01, globeAre=c("Entrez","Symbols")){
   ## z.score column ##
   zcol <- grep("z.score",colnames(allez.out$setscores))[1]
 ## Number of genes in list and functional set ##
@@ -27,11 +27,13 @@ allezMat <- function(allez.out,
          (nc[rownames(allez.out$setscores)] >= n.cell)
 
 
-## allez.out$aux$set.data: 1st col = set id; 2nd col = gene id ##
+## allez.out$aux$set.data: 1st col = set id; 2nd col = gene id (Entrez); 3rd is gene symbol ##
 ## mat: genes by GO category, 0 if not in cat, 1 if in category ##
 
-  rightCol <- 2  ## if not symbols...get a correct switch 
-  rightCol <- 3  ## for symbols  
+  globeAre <- match.arg(globeAre)
+  rightCol <- ifelse( globeAre == "Entrez", 2, 3 )
+		  #  rightCol <- 2  ## if not symbols...get a correct switch 
+		  # rightCol <- 3  ## for symbols  
 
   mat <- sapply(rownames(allez.out$setscores)[ok],function(x)
        as.numeric(names(allez.out$aux$globe) %in%
