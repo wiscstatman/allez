@@ -8,7 +8,7 @@ ordMat <- function(aMat,allez.out,maxSets){
   rind <- cind <- character(0)
   zc <- grep("z.score",colnames(allez.out$setscores))
   for(i in 1:ncol(aMat)){
-    mat <- if(i==1) aMat*allez.out$aux$globe else
+    mat <- if(i==1) aMat*c(allez.out$aux$globe) else
            aMat[-match(rind,rownames(aMat)),
                 -match(cind,colnames(aMat)),drop=FALSE]*
            allez.out$aux$globe[-match(rind,names(allez.out$aux$globe))]
