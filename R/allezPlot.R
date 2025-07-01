@@ -115,16 +115,20 @@ allezplot <- function(aOrd, allez.out,
     geom_rect(
       aes(
         xmin = gene-1, xmax = gene, 
-        ymin = y-0.5, ymax = y+0.5, 
+	#        ymin = y-0.5, ymax = y+0.5, 
+	ymin = y-1, ymax = y, 
         colour = score,
         fill = score
         )
       ) + 
     scale_y_discrete(limits = colnames(aOrd), position="left") + 
-    annotate(geom="text", x = xpos + 10, y = nsets:1, label = term$term, hjust = 0)+ 
+    annotate(geom="text", x = xpos + 2, y = (nsets:1) - (1/2), label = term$term, hjust = 0)+ 
+	coord_cartesian(clip = 'off') +
     scale_color_gradient(low = "#FFFFFF00", high = "#000000FF")+ 
     scale_fill_gradient(low = "#FFFFFF00", high = "#000000FF") +
-    ylab("")
+    ylab("") +
+	theme( legend.position="none" ) +
+	xlim(0, 1.4*max(df$gene) ) 
   
 }
 
