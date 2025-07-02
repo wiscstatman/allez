@@ -122,8 +122,8 @@ allezplot <- function(aOrd, allez.out,
         )
       ) + 
     scale_y_discrete(limits = colnames(aOrd), position="left") + 
-    theme( legend.position="none", base_size=12 ) +
-    annotate(geom="text", x = xpos + 2, y = (nsets:1) - (1/2), label = term$term, hjust = 0, size=12/.pt)+ 
+    theme( legend.position="none", base_size=11 ) +
+    annotate(geom="text", x = xpos + 2, y = (nsets:1) - (1/2), label = term$term, hjust = 0, size=11/(2*.pt) )+ 
 	coord_cartesian(clip = 'off') +
     scale_color_gradient(low = "#FFFFFF00", high = "#000000FF")+ 
     scale_fill_gradient(low = "#FFFFFF00", high = "#000000FF") +
